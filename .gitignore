@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# Cache
+.cache/
+.ipynb_checkpoints/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Model files (optional)
+*.pkl
+
+# Datasets (optional)
+dataset/
+email_dataset.csv
+
+# Node (if any)
+node_modules/
+
+API KEY.txt

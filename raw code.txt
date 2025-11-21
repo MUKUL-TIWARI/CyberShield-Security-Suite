@@ -1,0 +1,367 @@
+# In[38]:
+
+
+# Import basic libraries 
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+get_ipython().run_line_magic('matplotlib', 'inline')
+
+
+# In[39]:
+
+
+df = pd.read_csv('Dataset/phishing_site_urls.csv')
+
+
+# In[40]:
+
+
+df.head()
+
+
+# In[41]:
+
+
+df.shape
+
+
+# In[42]:
+
+
+df.info()
+
+
+# In[43]:
+
+
+df.isnull().sum()
+
+
+# In[44]:
+
+
+df.Label.value_counts()
+
+
+# In[ ]:
+
+
+
+
+
+# In[45]:
+
+
+from nltk.tokenize import RegexpTokenizer
+
+
+# In[46]:
+
+
+tokenizer = RegexpTokenizer(r'[A-Za-z]+')
+
+
+# In[47]:
+
+
+df.URL[0]
+
+
+# In[48]:
+
+
+tokenizer.tokenize(df.URL[0])
+
+
+# In[49]:
+
+
+df['text_tokenized'] = df.URL.map(lambda t: tokenizer.tokenize(t))
+
+
+# In[50]:
+
+
+df.head()
+
+
+# In[ ]:
+
+
+
+
+
+# In[51]:
+
+
+from nltk.stem.snowball import SnowballStemmer
+
+
+# In[52]:
+
+
+stemmer = SnowballStemmer('english')
+
+
+# In[53]:
+
+
+df['text_stemmed'] = df['text_tokenized'].map(lambda l: [stemmer.stem(word) for word in l])
+
+
+# In[54]:
+
+
+df.head()
+
+
+# In[55]:
+
+
+df['text'] = df['text_stemmed'].map(lambda l: ' '.join(l))
+
+
+# In[56]:
+
+
+df.head()
+
+
+# In[ ]:
+
+
+
+
+
+# In[57]:
+
+
+secure_sites = df[df.Label == 'good']
+unsecure_sites = df[df.Label == 'bad']
+
+
+# In[58]:
+
+
+secure_sites.head()
+
+
+# In[59]:
+
+
+def plot_wordcloud(text , mask=None, max_word=400, max_font_size=120, figure_size=(24.0,16.0),
+                   title = None, title_size=40, image_color=False):
+    stopwords = set(STOPWORDS)
+    more_stopwords = {'com','http'}
+    stopwords = stopwords.union(more_stopwords)
+
+    wordcloud = WordCloud(background_colors='white', 
+                    stopwords = stopwords,
+                    max_words = max_words,
+                    max_font_size = max_font_size,
+                    random_state = 42,
+                    mask = mask)
+    wordcloud.generate(text)
+
+    plt.figure(figsize=figure_size)
+    if image_color:
+        image_colors = ImageColorGenerator(mask);
+        plt.imshow(wordcloud.recolor(color_func=image_colors), interpolation="bilinear");
+        plt.title(title, fontdict={'size': title_size,
+                                    'verticalalignment': 'bottom'})
+    else:
+        plt.imshow(wordcloud);
+        plt.title(title, fontdicts={'size': title_size, 'color':'green',
+                                    'verticalalignment':'bootm'})
+        plt.axis('off');
+        plt.tight_layout()
+
+
+
+# In[60]:
+
+
+all_text = ' '.join(secure_sites['text'].tolist())
+
+
+# In[67]:
+
+
+from wordcloud import WordCloud
+
+
+# In[69]:
+
+
+# generate word cloud
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate(all_text)
+
+#display the word cloud
+plt.figure(figsize=(10,5))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+plt.show()
+
+
+# In[ ]:
+
+
+
+
+
+# In[70]:
+
+
+all_text= ' '.join(unsecure_sites['text'].tolist())
+
+
+# In[71]:
+
+
+# generate word cloud
+wordcloud = WordCloud(width=800, height=400, background_color='white').generate(all_text)
+
+#display the word cloud
+plt.figure(figsize=(10,5))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+plt.show()
+
+
+# In[72]:
+
+
+from sklearn.feature_extraction.text import CountVectorizer
+
+
+# In[73]:
+
+
+cv = CountVectorizer()
+
+
+# In[74]:
+
+
+features = cv.fit_transform(df.text)
+
+
+# In[75]:
+
+
+features[:5].toarray()
+
+
+# In[76]:
+
+
+from sklearn.model_selection import train_test_split
+
+
+# In[77]:
+
+
+x_train, x_test, y_train, y_test = train_test_split(features,df.Label, test_size=0.2)
+
+
+# In[ ]:
+
+
+
+
+
+# MODEL TRAINING
+
+# In[78]:
+
+
+from sklearn.linear_model import LogisticRegression
+
+
+# In[79]:
+
+
+l_model = LogisticRegression()
+
+
+# In[80]:
+
+
+l_model.fit(x_train,y_train)
+
+
+# In[81]:
+
+
+l_model.score(x_test,y_test)
+
+
+# In[82]:
+
+
+l_model.score(x_train, y_train)
+
+
+# In[84]:
+
+
+from sklearn.metrics import classification_report
+
+
+# In[86]:
+
+
+print('\nCLASSIFICATION REPORT\n')
+print(classification_report(l_model.predict(x_test), y_test,
+                            target_names =['unsecure','secure']))
+
+
+
+# In[87]:
+
+
+from sklearn.metrics import confusion_matrix
+
+
+# In[89]:
+
+
+con_mat = pd.DataFrame(confusion_matrix(l_model.predict(x_test), y_test),
+            columns = ['Predicated:Unsecure','Predicated:Secure'],
+            index = ['Actual:Unsecure','Actual:Secure'])
+
+
+# In[91]:
+
+
+import seaborn as sns
+
+
+# In[92]:
+
+
+print('\nCONFUSION MATRIX')
+plt.figure(figsize= (6,4))
+sns.heatmap(con_mat, annot = True,fmt='d',cmap="YlGnBu")
+
+
+# SAVE MODEL
+
+# In[97]:
+
+
+import pickle
+
+
+# In[98]:
+
+
+pickle.dump(l_model, open('phising.pkl','wb'))
+
+
+# In[99]:
+
+
+pickle.dump(cv, open('vectorizer.pkl','wb'))

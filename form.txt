@@ -1,0 +1,45 @@
+<div class="bg-white py-6 sm:py-8 lg:py-12">
+  <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+    <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl">Phishing URL Detector</h2>
+
+    <form id="phishingForm" class="mx-auto max-w-lg rounded-lg border">
+      <div class="flex flex-col gap-4 p-4 md:p-8">
+        <!-- URL Input -->
+        <div>
+          <label for="url" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Paste URL</label>
+          <input id="url" name="url" type="text" placeholder="https://example.com" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="block rounded-lg bg-indigo-600 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-500 focus-visible:ring active:bg-indigo-700 md:text-base">
+          Check URL
+        </button>
+
+        <!-- Result Box -->
+        <div id="resultBox" class="mt-4 hidden rounded-lg border border-gray-300 bg-gray-50 p-4 text-gray-800">
+          <p id="resultText" class="text-base font-medium"></p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.getElementById('phishingForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const url = document.getElementById('url').value;
+    const resultBox = document.getElementById('resultBox');
+    const resultText = document.getElementById('resultText');
+
+    // Dummy detection logic (replace with real API or ML model)
+    if (url.includes("login") || url.includes("verify") || url.includes("update-account")) {
+      resultText.textContent = "⚠️ This URL looks suspicious. Be cautious!";
+      resultBox.classList.remove("hidden");
+      resultBox.classList.add("border-red-500", "bg-red-50");
+    } else {
+      resultText.textContent = "✅ This URL appears safe.";
+      resultBox.classList.remove("hidden");
+      resultBox.classList.add("border-green-500", "bg-green-50");
+    }
+  });
+</script>
