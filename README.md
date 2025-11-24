@@ -8,56 +8,56 @@
 
 ---
 
-## 📌 About the Project (Mini Project)
+##  About the Project (Mini Project)
 **CyberShield Security Suite** is a cybersecurity-focused **mini project** developed for academic learning and practical implementation.  
 It demonstrates how **AI + Machine Learning** can detect:
 
-✔ Phishing URLs  
-✔ Phishing Emails  
-✔ Scam Call Transcripts  
+Phishing URLs  
+ Phishing Emails  
+ Scam Call Transcripts  
 
 The system is built with a **production-like architecture**, making it more advanced than a typical mini project while remaining simple enough for academic evaluation.
 
 ---
 
-## 🚀 Features
+##  Features
 
-### 🔗 URL Threat Inspector
+###  URL Threat Inspector
 - ML-based detection (Random Forest)  
 - TF-IDF + Numeric feature engineering  
 - Confidence scores  
 - Heuristic fallback analysis  
 
-### 📧 Email Forensics Analyzer
+###  Email Forensics Analyzer
 - NLP-based classification (phishing vs safe)  
 - Uses subject + sender + email body  
 - Trained on curated phishing datasets  
 
-### 📞 Vishing (Call Scam) Analyzer
+###  Vishing (Call Scam) Analyzer
 - Detects psychological manipulation patterns  
 - Based on transcript NLP modeling  
 
-### 🎨 Modern Frontend
+###  Modern Frontend
 - Built using **HTML + TailwindCSS**  
 - Fully responsive UI  
 - Professional, infosec-themed design  
 
 ---
 
-## 📸 Project Screenshots
+##  Project Screenshots
 
-### 🏠 Homepage
+###  Homepage
 ![Homepage](static/screenshots/home.png)
 
-### 🔗 URL Scanner
+###  URL Scanner
 ![URL Scanner](static/screenshots/url.png)
 
-### ✉ Email Analyzer
+###  Email Analyzer
 ![Email Scanner](static/screenshots/email.png)
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 ### **Frontend**
 - HTML5  
@@ -95,15 +95,15 @@ Each detector runs its own trained model:
 - call_rf_model.pkl  
 
 ### **4️⃣ Threat Report**
-UI displays:  
-✔ Safe  
-✔ Suspicious  
-✔ Dangerous  
-✔ Confidence Score  
+- UI displays:  
+- Safe  
+- Suspicious  
+- Dangerous  
+- Confidence Score  
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 CyberShield/
@@ -131,7 +131,7 @@ CyberShield/
 
 ---
 
-## ⚡ Installation
+##  Installation
 
 ### 1️⃣ Clone Repository
 ```bash
@@ -164,7 +164,7 @@ http://127.0.0.1:5000/
 
 ---
 
-## 🎓 Why This Mini Project is Valuable  
+##  Why This Mini Project is Valuable  
 - Combines **Cybersecurity + Machine Learning + NLP + Web Development**  
 - Includes **3 fully trained ML models**  
 - Demonstrates real-world techniques like  
@@ -176,13 +176,13 @@ http://127.0.0.1:5000/
 
 ---
 
-## 👥 Team Members (Developers)
-🔸 Nikhil Singh
+## Team Members (Developers)
+Nikhil Singh
 
 Role: Team Leader
 B.Tech AI/ML Student 
 
-🔸 Mukul Tiwari
+ Mukul Tiwari
 
 Role: Co-Developer
 B.Tech AI/ML Student 
@@ -194,6 +194,6 @@ MIT License — Free to use & improve.
 
 ---
 
-# 🎉 Thank You for Exploring CyberShield!
+#  Thank You for Exploring CyberShield!
 If you like this project, feel free to ⭐ star the repo on GitHub.
 
