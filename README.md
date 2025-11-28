@@ -178,6 +178,8 @@ http://127.0.0.1:5000/
 
 ## Team Members (Developers)
 Nikhil Singh
+Linkedin: https://www.linkedin.com/in/nikhilsingh-ml
+Github: https://github.com/nikhilsingh-ml
 
 Role: Team Leader
 B.Tech AI/ML Student 
@@ -189,7 +191,7 @@ B.Tech AI/ML Student
 
 ---
 
-## 📜 License
+## License
 MIT License — Free to use & improve.
 
 ---
