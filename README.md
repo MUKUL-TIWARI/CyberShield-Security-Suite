@@ -177,8 +177,8 @@ http://127.0.0.1:5000/
 ---
 
 ## Team Members (Developers)
-Nikhil Singh
-Linkedin: https://www.linkedin.com/in/nikhilsingh-ml
+Nikhil Singh <br>
+Linkedin: https://www.linkedin.com/in/nikhilsingh-ml <br>
 Github: https://github.com/nikhilsingh-ml
 
 Role: Team Leader
