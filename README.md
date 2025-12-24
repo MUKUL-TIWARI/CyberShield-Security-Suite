@@ -1,4 +1,4 @@
-# 🛡️ CyberShield Security Suite  
+#  CyberShield Security Suite  
 ### **AI-Powered Phishing Detection System (Mini Project)**  
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
